@@ -1,0 +1,215 @@
+<div>
+<style>
+body{
+ background-image: url("http://userscontent2.emaze.com/images/c132ac63-8e9d-44a4-abc0-5d33d87af2be/635306982802052356_blue-geisha-design-plain.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+     background-size: cover;
+
+}
+
+</style>
+	<hr>
+	<button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#myModal">Add
+		New Task</button>
+		
+	<h2>All Task</h2>
+	<span class="clearfix"></span>
+	</hr>
+	<hr>
+	</hr>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Task_Id</th>
+				<th>Task Title</th>
+				<th>Task Description</th>
+				<th>Lastdate</th>
+					<th>Postedby<th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="task in tasks">
+				<td>{{task.task_Id}}</td>
+				<td>{{task.task_Name}}</td>
+				<td>{{task.task_Description}}</td>
+				<td>{{task.task_Lastdate}}</td>
+				<td>{{task.postedBy}}</td>
+	<td><button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#updateTask"
+					ng-click="updateTask(task)">Update</button></td>
+	<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#finished" 
+						ng-click="finished(task)">finished</button></td>
+				
+			</tr>
+		</tbody>
+	</table>
+<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add New Task</h4>
+				</div>
+				<div class="modal-body">
+				<form class="form-horizontal" name="regForm">
+<div class="form-group">
+    <label class="control-label col-sm-2" for="task_Name">Task Name:</label>
+    <div class="col-sm-10">
+ <input type="text" class="form-control" name="task_Name" placeholder="Enter Title" ng-model="task_Name" required>
+ <span  ng-show="regForm.task_Name.$error.required" style="color:red; font-family: cursive; font-size: small;">*title required</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="task_Description">Description:</label>
+    <div class="col-sm-10"> 
+      <textarea class="form-control" id="task_Description" placeholder="Enter Description" ng-model="task_Description" required></textarea>
+      <span  ng-show="regForm.task_Description.$error.required" style="color:red; font-family: cursive; font-size: small;">*title required</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="task_Lastdate">Lastdate:</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="task_Lastdate" placeholder="Enter category" ng-model="task_Lastdate" required>
+      <span  ng-show="regForm.task_Lastdate.$error.required" style="color:red; font-family: cursive; font-size: small;">*title required</span>
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="task()" data-dismiss="modal">Add Task</button>
+    </div>
+  </div>
+</form>
+ </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+  </div>
+<!--   <form>
+  <input type="text" ng-model="task_Name" name="task_Name"><br>
+Task Description:
+<input type="text" ng-model="task_Description" name="task_Description"><br>
+Lastdate:
+<input type="text" ng-model="task_Lastdate" name="task_Lastdate"><br>
+<button type="submit" ng-click="task()">AddTask</button>
+</form> -->
+
+
+<div class="modal fade" id="updateTask" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Update</h4>
+				</div>
+				<div class="modal-body">
+				<form class="form-horizontal">
+         <div class="form-group">
+    <label class="control-label col-sm-2" for="task_Id">Task_Id</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="task_Id" ng-model="taskupdate.task_Id">
+    </div>
+  </div>
+		<div class="form-group">
+    <label class="control-label col-sm-2" for="task_Name">Task_Name:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="task_Name" ng-model="taskupdate.task_Name">
+    </div>
+  </div>		
+	<div class="form-group">
+    <label class="control-label col-sm-2" for="task_Description">Task_Description:</label>
+    <div class="col-sm-10"> 
+      <textarea class="form-control" id="task_Description" ng-model="taskupdate.task_Description"></textarea>
+    </div>
+  </div>			
+		 <div class="form-group">
+    <label class="control-label col-sm-2" for="task_Lastdate">Lastdate</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="task_Lastdate" ng-model="taskupdate.task_Lastdate">
+    </div>
+  </div>		
+		<div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="saveUpdate()" data-dismiss="modal">Update</button>
+    </div>
+  </div>
+</form>		
+	</div>
+		<div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="finished" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+<button type="button" class="close"   data-dismiss="modal">&times; </button>
+					<h4 class="modal-title">finished</h4>
+
+				</div>
+				<div class="modal-body">Do you want to complete
+					{{taskstatus.clienttask_Id}} task?</div>
+			</div>
+			<div class="modal-footer">
+		<button type="button" class="btn-btn-default" data-dismiss="modal"  
+					ng-click="finishedTask(task)">Yes</button>
+				<button type="button" class="btn-btn-default" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<h2>Finished Tasks</h2>
+<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Task_Id</th>
+				<th>Task Title</th>
+				<th>Task Description</th>
+				<th>Lastdate</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="finishedtask in finishedtasks">
+				<td>{{finishedtask.task_Id}}</td>
+				<td>{{finishedtask.task_Name}}</td>
+				<td>{{finishedtask.task_Description}}</td>
+				<td>{{finishedtask.task_Lastdate}}</td>
+				
+				
+			</tr>
+		</tbody>
+	</table>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

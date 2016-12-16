@@ -1,0 +1,28 @@
+<div>
+	<hr>
+	
+	<h2>All Tasks</h2>
+	<span class="clearfix"></span>
+	</hr>
+	<hr>
+	</hr>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>task_Id</th>
+				<th>task_Name</th>
+				<th>task_Description</th>
+				
+				</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="alltasks in tasks">
+				<td>{{alltasks.task_Id}}</td>
+				<td>{{alltasks.task_Name}}</td>
+				<td>{{alltasks.task_Description}}</td>
+				<td><button type="button" class="btn btn-primary btn-sm "
+						data-toggle="modal" data-target="#updateTask"
+						ng-click="updateTask(alltasks)">Update</button></td>
+				</tr>
+		</tbody>
+	</table>
